@@ -45,6 +45,7 @@ def marginal_px(x):
     """
     Compute PX(x) by summing joint_pmf(x, y) over y = 0,1,2,3.
     """
+
     total = 0
 
     for y in range(4):
@@ -57,6 +58,7 @@ def marginal_py(y):
     """
     Compute PY(y) by summing joint_pmf(x, y) over x = 0,1,2,3.
     """
+
     total = 0
 
     for x in range(4):
@@ -112,6 +114,7 @@ def probability_sum_greater_than_3():
 
     for x in range(4):
         for y in range(4):
+
             if x + y > 3:
                 total += joint_pmf(x, y)
 
@@ -244,15 +247,15 @@ def variance_sum():
     Compute Var(X+Y).
     """
 
-    ex_plus_y = expected_x() + expected_y()
+    expected_sum = expected_x() + expected_y()
 
-    ex_plus_y_sq = 0
+    expected_square_sum = 0
 
     for x in range(4):
         for y in range(4):
-            ex_plus_y_sq += ((x + y) ** 2) * joint_pmf(x, y)
+            expected_square_sum += ((x + y) ** 2) * joint_pmf(x, y)
 
-    return ex_plus_y_sq - (ex_plus_y ** 2)
+    return expected_square_sum - (expected_sum ** 2)
 
 
 def variance_identity_check():
@@ -272,4 +275,4 @@ def variance_identity_check():
         + 2 * covariance_xy()
     )
 
-    return np.isclose(left_side, right_side)
+    return bool(np.isclose(left_side, right_side))
